@@ -1,0 +1,7 @@
+server:
+  port: 9090
+
+#  rsa私钥
+rsa:
+  private:
+    key: fdjaslksfjdslafjksjd
