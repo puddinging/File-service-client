@@ -1,7 +1,13 @@
 server:
   port: 9090
 
-#  rsa私钥
+#  rsa私钥路径
 rsa:
   private:
-    key: fdjaslksfjdslafjksjd
+    priRsaKeyPath:
+
+#rest请求使用的url
+url:
+  downloadUrl:
+  uploadUrl:
+  getDataUrl:

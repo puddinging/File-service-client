@@ -1,14 +1,10 @@
 package com.fire.fileserviceclient.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fire.fileserviceclient.utils.RSAEncrypt;
 import com.fire.fileserviceclient.utils.RsaUtil;
-import com.sun.deploy.net.HttpResponse;
-import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -19,9 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,16 +24,16 @@ public class FileService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${rsa.private.key}")
+    @Value("${rsa.private.priRsaKeyPath}")
     private String priRsaKeyPath;
 
-    @Value("${rsa.private.key}")
+    @Value("${url.downloadUrl}")
     private String downloadUrl;
 
-    @Value("${rsa.private.key}")
+    @Value("${url.uploadUrl}")
     private String uploadUrl;
 
-    @Value("${rsa.private.key}")
+    @Value("${url.getDataUrl}")
     private String getDataUrl;
 
     /**
