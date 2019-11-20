@@ -1,6 +1,7 @@
 package com.fire.fileserviceclient.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fire.fileserviceclient.utils.HttpUtil;
 import com.fire.fileserviceclient.utils.RSAEncrypt;
 import com.fire.fileserviceclient.utils.RsaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +43,13 @@ public class FileService {
      */
     public void downloadFile(String uuid, HttpServletResponse resp) {
 //        获取文件
+        // TODO: 2019/11/15 需要加一个头信息来响应
         Map<String,String> map = new HashMap<>();
         map.put("fileName",uuid);
         byte[] result = restTemplate.postForObject(downloadUrl,map,byte[].class);
 
 //        获取密钥并使用私钥进行解密
-
+        // TODO: 2019/11/15 需要加一个头信息来请求 
         String data = restTemplate.postForObject(getDataUrl,map,String.class);
 //        json解析
         JSONObject jsonObject = JSONObject.parseObject(data);
@@ -73,6 +75,7 @@ public class FileService {
     }
 
     private byte[] fileDecryptByKey(String key, byte[] result) {
+        // TODO: 2019/11/15 实现文件解密，返回一个byte[]
         return new byte[0];
     }
 
@@ -84,18 +87,14 @@ public class FileService {
      */
     public String uploadFile(MultipartFile file) {
 //        请求头信息
-        HttpHeaders headers = new HttpHeaders();
-        MediaType type = MediaType.parseMediaType("multipart/form-data");
-        headers.setContentType(type);
-        headers.add("X-SID","");
-        headers.add("X-Signature","");
+        
 
 //        请求体信息
         MultiValueMap<String, Object> form = new LinkedMultiValueMap<>();
         form.add("file", file);
         form.add("fileName",file.getOriginalFilename());
 
-        HttpEntity<MultiValueMap<String, Object>> files = new HttpEntity<>(form, headers);
+        HttpEntity<MultiValueMap<String, Object>> files = new HttpEntity<>(form, new HttpUtil().getHeader());
 
         return restTemplate.postForObject(uploadUrl, files, String.class);
     }

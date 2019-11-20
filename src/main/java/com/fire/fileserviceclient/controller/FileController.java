@@ -1,14 +1,14 @@
 package com.fire.fileserviceclient.controller;
 
 import com.fire.fileserviceclient.service.FileService;
-import com.sun.activation.registries.MailcapFile;
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/api/file")
@@ -22,7 +22,7 @@ public class FileController {
      * @return
      */
     @RequestMapping(value = "downloadFile",method = RequestMethod.GET)
-    public void downloadFile(@RequestParam String uuid, HttpResponse response){
+    public void downloadFile(@RequestParam String uuid, HttpServletResponse response){
         service.downloadFile(uuid,response);
     }
 
