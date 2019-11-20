@@ -32,6 +32,8 @@ public final class Base64 {
         base64Alphabet['+'] = 62;
         base64Alphabet['/'] = 63;
 
+
+
         for (int i = 0; i <= 25; i++) {
             lookUpBase64Alphabet[i] = (char) ('A' + i);
         }
